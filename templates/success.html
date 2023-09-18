@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Poker Now Anayzer</title>
+    <style>
+        .reset-button {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+        }
+        
+ 
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+      
+        td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Poker log Upload Successful!</h1>
+    <p>The CSV file was uploaded successfully.</p>
+    <p>Open the PDF below for the graph version of the individual player data:</p>
+    <p><a href="/view_pdf" target="_blank">Open PDF</a></p>
+    
+    <form action="/" method="post" class="reset-button">
+        <input type="hidden" name="reset" value="true">
+        <button type="submit">Reset</button>
+    </form>
+    
+    
+
+    <div id="chat-container">
+        <h3>Ask any poker related questions below:</h3>
+        <div id="chat-messages"></div>
+        <form id="question-form">
+            <textarea id="question" name="question" placeholder="Enter your question" rows="4"></textarea>
+            <button type="submit">Ask</button>
+        </form>
+        <div id="answer-box">
+            <h4>Answer:</h4>
+            <p id="answer-text"></p>
+        </div>
+    </div>
+    
+    <script type="text/javascript">
+
+        document.getElementById("question-form").onsubmit = function(event) {
+            event.preventDefault(); 
+            var question = document.getElementById("question").value;
+            askQuestion(question);
+        };
+        function askQuestion(question) {
+            fetch('/ask_question', {
+                method: 'POST',
+                body: new URLSearchParams({ question: question }),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+            .then(response => response.text())
+            .then(response => displayResponse(response));
+        }
+    
+        function displayResponse(response) {
+            var answerText = document.getElementById("answer-text");
+            
+            
+            answerText.textContent = response;
+        }
+    </script>
+ 
+    <h4>If you would like to generate a strategy to play against a certain player, click the corresponding generate strategy button next to a player's name and it will appear below:</h4>
+
+    <div id="generated-strategy-container">
+
+    </div>
+    <script type="text/javascript">
+
+        function generateStrategy(playerName) {
+            fetch('/generate_strategy', {
+                method: 'POST',
+                body: new URLSearchParams({ player_name: playerName }),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+            .then(response => response.text())
+            .then(response => displayGeneratedStrategy(response));
+        }
+    
+        function displayGeneratedStrategy(strategy) {
+            var strategyContainer = document.getElementById("generated-strategy-container");
+            strategyContainer.innerHTML = ''; 
+            var strategyText = document.createElement("p");
+            strategyText.textContent = "Generated Strategy: " + strategy;
+            strategyContainer.appendChild(strategyText);
+        }
+    
+     
+    
+    </script>
+    
+    <h2>Player Statistics</h2>
+
+    
+<table>
+    <tr>
+        <th>Player</th>
+        <th>Actions</th> 
+        {% for player, stats in player_data.items() %}
+            {% if loop.index == 1 %}
+                {% for key in stats.keys() %}
+                    <th>{{ key }}</th>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    </tr>
+    {% for player, stats in player_data.items() %}
+    <tr>
+        <td>{{ player }}</td>
+        <td>
+            <button type="button" onclick="generateStrategy('{{ player }}')">Generate Strategy</button>
+        </td>
+        {% for key, value in stats.items() %}
+            <td>{{ value }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+
+ 
+</html>

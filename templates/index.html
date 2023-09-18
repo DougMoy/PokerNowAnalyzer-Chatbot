@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSV Upload</title>
+</head>
+<body>
+    <h1>Upload your pokernow.csv file! You can click browse which will open your directory and you can upload it there, or you can drag and drop the file. </h1>
+    <form action="/" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".csv">
+        <input type="submit" value="Upload">
+    </form>
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
+</body>
+</html>

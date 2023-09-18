@@ -1,0 +1,77 @@
+VPIP tracks the percentage of hands in which a particular player voluntarily puts money into the pot preflop. VPIP increases when a player could fold but instead commits money to the pot preflop. This includes limping (merely calling the big blind), calling, and raising.
+
+PFR tracks the percentage of hands in which a particular player makes a preflop raise when having the opportunity to fold or call instead. This includes reraises.
+
+Against players with a higher VPIP (Greater than 45%) or a player with a very high PFR (Greater than 20%) exploit them by raising them or calling them lighter. Against players with lower VPIP (Lower than 
+
+3Bet%
+This is an important stat (3bet%) to have in your arsenal as it shows how often your opponent 3-bets before the flop. 
+Anything less than 8% would be considered tight (meaning they have a low 3 bet%) and anything more than 8% would be considered aggressive (meaning they have a high 3bet%).
+Some adjustments that you can make vs tight or loose 3-bettors are:
+When a very aggressive 3-bettor is behind, open-raise a slightly tighter range than usual.
+With only tight 3-bettors behind, you can profitably open-raise a slightly wider range.
+When you face a 3-bet from an aggressive player, continue more often by 4-betting and calling with more hands than usual.
+When you face a 3 bet from a tight player, only continue with your strongest hands as they are likely to have very strong hands.
+
+Fold to 3 Bet after raising%:
+How often they fold to a 3-bet after raising
+.
+If a player is folding 40% (this is a low fold to 3 bet) or less to 3-bets, then you need to raise them primarily for value. This will involve using a depolarized range. 
+If a player is folding 60% (This is a high fold to 3 bet) or more to 3-bets, then you need to raise them primarily as a bluff. This will involve using a polarized range.
+The percentages of fold to 3-bet work on a sliding scale. The closer they are to 40% or less, the more you want to be weighted towards value. The closer they are to 60%, the more bluffs you want to work into your range.
+
+WTSD: went to showdown
+This is a very important postflop statistic that tells you how frequently a player reaches showdown after seeing a flop. It is useful for identifying how much of a calling station your opponent is.
+For example, if a player saw the flop 10 times and went to showdown 4 times in a session, that player’s WTSD is 40% for that session.
+This stat is to be used in conjunction with Won Money at Showdown (W$SD or WSD) and Won When Saw Flop (WWSF), which I will go over shortly.
+A good WTSD frequency is somewhere around 27-32%, with 30% being a good place to aim for. Too low and you are probably over-folding postflop; too high and you are probably calling too often.
+Since the vast majority of pots do not go past preflop (only 17% of hands see the flop), this stat requires a much bigger sample for an accurate read to be made — aim to have around 8,000 hands on a player before making notable adjustments based on WTSD.
+5. WSD: Won Money at Showdown
+Also abbreviated as W$SD, this stat tells you how often your opponent has won when they reached showdown. As alluded to above, this stat isn’t too helpful on his own, but it can be helpful when used in conjunction with WTSD.
+A good W$SD is somewhere between 49% and 54%. A correct frequency is dependent on the other two statistics mentioned. For example, a player who has a low Went to Showdown (WTSD) frequency will usually have a relatively high WSD and vice versa. In other words, if you rarely reach showdown, it’s probably because you’re a tight player who usually has a strong hand when you go the distance in a hand.
+In general, if your WSD is too low, then it means you are probably calling too many bad hands and/or bluffing too much earlier in the hand. If it’s too high, it means that you are probably either not bluff-catching enough and/or not bluffing enough.
+The sample required for a decently accurate read is the same as WTSD, above 8,000 hands.
+6. WWSF: Won When Saw Flop
+Tying up the 3 statistics that work together…
+WWSF refers to how often your opponent has won the pot after seeing the flop.
+A decent WWSF frequency is anywhere between 45% and 53%, with a good average being around 48%. Too low? That means that your opponent is not bluffing enough and/or giving up too much. Too high? That means that you are bluffing and/or bluff-catching too much.
+The sample required for a reasonably accurate read is the same as the one for the previous two: 8,
+
+How WTSD, WSD, and WWSF Work Together
+Each one of these stats provide important context for the others, which will allow you to draw
+major conclusions about your opponents.
+Let’s consider a few example players.
+(Remember that: WTSD = Went To Showdown, WSD = Won Money At Showdown, and WWSF
+= Won When Saw Flop)
+Player A: WTSD: 32 / WSD: 51 / WWSF: 46
+This player is more or less a passive calling station. He has a high WTSD, but he’s apparently
+calling pretty light to since he’s only winning 51% of the time at showdown. He’s also not very
+aggressive, hence the low WWSF.
+The degree to which Player A is a calling station will be clearer by looking at his VPIP. A high
+VPIP, like 40%, means this player plays a lot of hands and doesn’t do much folding postflop.
+Your adjustment against such a player should be to go for more thin value bets and fewer bluffs.
+Player B: WTSD: 26/ WSD: 56/ WWSF: 44
+This type of player rarely goes to showdown, but it’s clearly not due to aggression because he
+also has a low WWSF. Player B is likely a quite tight player who folds quite often postflop — a
+conclusion we can draw from his high WSD.
+Player C: WTSD: 30/ WSD: 52/ WWSF: 49
+Assuming this player has decent preflop stats (~25% VPIP), Player C is quite the terror at the
+table. She doesn’t seem to fold too much or too little based on her WTSD. She’s also clearly
+aggressive and actively trying to steal pots, indicated by the high WWSF. Expect to face a lot of
+tough decisions against a player like this
+
+Flop CBET%refers to how often a player has continuation bet (c-bet) on the flop after
+raising preflop. If a player has a higher Flop CBET%, you can exploit this by calling lighter and raising/check-raising lighter. If they have a lower FLOP CBET%, you should only call or raise with your stronger hands and draws.
+
+Fold to Flop C-Bet% tells you how often a player has called a raise preflop and then folded
+to a continuation bet on the flop. Generally speaking, the folding frequency should be on the lower side below 50%. If opponents have a higher Fold to Flop Cbet% (Greater than 50%),  you can exploit this by cbetting more and lighter. If they have a lower CBET(Lower than 50%), be more selective with your continuation bets knowing they are more likely to call.
+
+AF
+
+AF is Aggression factor. It is technically defined as the "Ratio of the times a player makes a postflop aggressive action (a bet or raise) to the times they call.  For example, a player with an AF of 2 has bet or raised twice as many times as they have called."
+
+As a mathematical expression here is what AF would look like:
+
+(Total Bets) + (Total Raises) / (Total Calls) = AF.
+
+Players with a higher Aggression factor are typically more aggressive. The barrier is typically 2.5 where players with an AF higher than 2.5 are considered aggressive and players with less than 2.5 are less aggressive. An AF of one is considered extremely passive. When playing against players with high aggression factors, be more careful betting or playing against them as it is harder to get to showdown with your marginal hands or hitting your draws. Playing against players with lower aggression factors, you should aim to be semi bluffing more with draws as they are unlikely to raise.
