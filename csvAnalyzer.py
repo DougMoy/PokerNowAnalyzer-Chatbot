@@ -51,12 +51,13 @@ def generatePlayerStats():
         totalCount = 0
         lines = csvfile.readlines()
         lines.reverse()
-        actualPreFlopRaiser = "NA"
+        
         PFR = False
         for line in lines:
             first = line.split(",")[0] 
             if first.__contains__("-- starting hand"):
                 PFR = False
+                actualPreFlopRaiser = "NA"
                 preflopRaiser = "NA"
                 done = False
             elif done == True:
