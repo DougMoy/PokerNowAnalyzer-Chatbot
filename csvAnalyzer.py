@@ -326,7 +326,7 @@ def generatePlayerStats():
         playerStats[i]["PREFLOP WIN%"] = playerWins[i]["PREFLOPWIN"]/playerWins[i]["TOTALWINS"] if playerWins[i]["TOTALWINS"] != 0 else "NA"
         playerStats[i]["FLOP WIN%"] = playerWins[i]["FLOPWIN"]/playerWins[i]["TOTALWINS"] if playerWins[i]["TOTALWINS"] != 0 else "NA"
         playerStats[i]["TURN WIN%"] = playerWins[i]["TURNWIN"]/playerWins[i]["TOTALWINS"] if playerWins[i]["TOTALWINS"] != 0 else "NA"
-        playerStats[i]["RIVER WIN%"] = playerWins[i]["FLOPWIN"]/playerWins[i]["TOTALWINS"] if playerWins[i]["TOTALWINS"] != 0 else "NA"
+        playerStats[i]["RIVER WIN%"] = playerWins[i]["RIVERWIN"]/playerWins[i]["TOTALWINS"] if playerWins[i]["TOTALWINS"] != 0 else "NA"
         playerStats[i]["SHOWDOWN WIN%"] = playerWins[i]["SHOWDOWNWIN"]/playerWins[i]["TOTALWINS"] if playerWins[i]["TOTALWINS"] != 0 else "NA"
         playerStats[i]["FLOP CBET%"] = playerCBet[i]["CBETACTUAL"]/playerCBet[i]["CBETCHANCES"] if playerCBet[i]["CBETCHANCES"] != 0 else "NA"
         totalCBETFACE = playerCBet[i]["CALLCBET"] + playerCBet[i]["FOLDCBET"] 
