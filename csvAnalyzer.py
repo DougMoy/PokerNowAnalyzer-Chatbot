@@ -274,11 +274,21 @@ def generatePlayerStats():
                 elif first.__contains__("fold") and playerRaise == 2 and player == pfr:
                     playerData[player]["3BetFold"] +=1
                     playerData[player]["3BetFaceTotal"] +=1
+                elif first.__contains__("call") and playerRaise == 2 and player == pfr:
+                    #face 3 bet and call
+                    playerData[player]["3BetFaceTotal"] +=1
                 elif first.__contains__("fold") and playerRaise == 3:
+                    #face 4 bet and fold
                     playerData[player]["4BetFold"] +=1
+                    playerData[player]["4BetFaceTotal"] +=1
+                elif first.__contains__("call") and playerRaise == 3:
+                    #face 4 bet and call
                     playerData[player]["4BetFaceTotal"] +=1
                 elif first.__contains__("fold") and playerRaise == 4:
                     playerData[player]["5BetFold"] +=1
+                    playerData[player]["5BetFaceTotal"] +=1
+                elif first.__contains__("call") and playerRaise == 4:
+                    #face 5 bet and call
                     playerData[player]["5BetFaceTotal"] +=1
 
     with open('importantpokernow.csv', 'r') as csvfile:
