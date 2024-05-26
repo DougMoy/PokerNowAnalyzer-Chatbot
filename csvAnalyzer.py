@@ -24,7 +24,7 @@ def generatePlayerStats():
 
 
     for i in players:
-        playerData[i] = {"handsPlayed": 0, "PFR": 0, "VPIP": 0, "3BET": 0, "4BET": 0, "5BET": 0, "6BET" :0, "RaiseFaceTotal" :0, "3BetFaceTotal": 0,  "4BetFaceTotal": 0, "5BetFaceTotal": 0, "3BetFold": 0, "4BetFold": 0, "5BetFold" : 0, "CBET%": 0}
+        playerData[i] = {"handsPlayed": 0, "PFR": 0, "VPIP": 0, "3BET": 0, "4BET": 0, "5BET": 0, "6BET" :0, "RaiseFaceTotal" :0, "3BetFaceTotal": 0, "3BetFaceTotalAfterRaising": 0,  "4BetFaceTotal": 0, "5BetFaceTotal": 0, "3BetFold": 0, "3BetFoldAfterRaising":0, "4BetFold": 0, "5BetFold" : 0, "CBET%": 0}
         playerStats[i] = { "TOTAL HANDS": 0,"PFR": 0, "VPIP": 0, "3BET%": 0, "FOLD TO 3BET AFTER RAISING%": 0, "FLOP CBET%": 0, "FOLD TO FLOP CBET%": 0, "AF":0, "WTSD": 0, "W$SD":0, "WWSF": 0, "PREFLOP WIN%": 0, "FLOP WIN%" : 0, "TURN WIN%": 0, "RIVER WIN%": 0, "SHOWDOWN WIN%":0, "4BET%": 0, "4BET FOLD%" :0, "5BET%" : 0}
         playerWins[i] = {"PREFLOPWIN": 0, "FLOPWIN" :0 , "TURNWIN" :0, "RIVERWIN":0, "SHOWDOWNWIN" :0, "TOTALWINS":0}
         playerCBet[i] = {"CBETACTUAL": 0, "CBETCHANCES": 0, "CALLCBET": 0, "FOLDCBET" :0}
@@ -51,6 +51,7 @@ def generatePlayerStats():
         totalCount = 0
         lines = csvfile.readlines()
         lines.reverse()
+        
         
         PFR = False
         for line in lines:
@@ -226,6 +227,8 @@ def generatePlayerStats():
                     playerData[player]["VPIP"] +=1
 
     #PFR 3 bet 4 bet yadadaa
+
+    #dont account for calling, need to fix
     with open('importantpokernow.csv', 'r') as csvfile:
         preflop = False
         totalCount = 0
@@ -244,16 +247,22 @@ def generatePlayerStats():
                 second_quote = first.index('""', first_quote + 3)
                 player = first[first_quote + 3:second_quote]
                 if first.__contains__("raises"):
-                    if playerRaise == 0:
+                    if playerRaise == 0: 
                         playerData[player]["PFR"] +=1
                         pfr = player
                         playerRaise = playerRaise + 1
-                    elif playerRaise == 1:
+                    elif playerRaise == 1: #raised pot
                         playerData[player]["RaiseFaceTotal"] +=1
                         playerData[player]["PFR"] +=1
                         playerData[player]["3BET"] +=1
                         playerRaise = playerRaise + 1
-                    elif playerRaise == 2:
+                    elif playerRaise == 2 and player == pfr:
+                        playerData[player]["PFR"] +=1
+                        playerData[player]["3BetFaceTotalAfterRaising"] +=1
+                        playerData[player]["3BetFaceTotal"] +=1
+                        playerData[player]["4BET"] +=1
+                        playerRaise = playerRaise + 1
+                    elif playerRaise == 2: #3 bet pot
                         playerData[player]["PFR"] +=1
                         playerData[player]["3BetFaceTotal"] +=1
                         playerData[player]["4BET"] +=1
@@ -272,9 +281,20 @@ def generatePlayerStats():
                 if first.__contains__("fold") and playerRaise == 1:
                     playerData[player]["RaiseFaceTotal"] +=1
                 elif first.__contains__("fold") and playerRaise == 2 and player == pfr:
-                    playerData[player]["3BetFold"] +=1
+                    
+                    playerData[player]["3BetFoldAfterRaising"] +=1
+                    playerData[player]["3BetFaceTotalAfterRaising"] +=1
                     playerData[player]["3BetFaceTotal"] +=1
                 elif first.__contains__("call") and playerRaise == 2 and player == pfr:
+                    #face 3 bet and call
+                    playerData[player]["3BetFaceTotalAfterRaising"] +=1
+                    playerData[player]["3BetFaceTotal"] +=1
+                    
+                    
+                elif first.__contains__("fold") and playerRaise == 2:
+                    playerData[player]["3BetFold"] +=1
+                    playerData[player]["3BetFaceTotal"] +=1
+                elif first.__contains__("call") and playerRaise == 2:
                     #face 3 bet and call
                     playerData[player]["3BetFaceTotal"] +=1
                 elif first.__contains__("fold") and playerRaise == 3:
@@ -290,6 +310,7 @@ def generatePlayerStats():
                 elif first.__contains__("call") and playerRaise == 4:
                     #face 5 bet and call
                     playerData[player]["5BetFaceTotal"] +=1
+                
 
     with open('importantpokernow.csv', 'r') as csvfile:
         hand = "preflop"
@@ -328,7 +349,7 @@ def generatePlayerStats():
         playerStats[i]["PFR"] = playerData[i]["PFR"] / playerData[i]["handsPlayed"] if playerData[i]["handsPlayed"] != 0 else 0
         playerStats[i]["VPIP"] = playerData[i]["VPIP"] / playerData[i]["handsPlayed"] if playerData[i]["handsPlayed"] != 0 else 0
         playerStats[i]["3BET%"] = playerData[i]["3BET"] / playerData[i]["handsPlayed"] if playerData[i]["RaiseFaceTotal"] != 0 else "NA"
-        playerStats[i]["FOLD TO 3BET AFTER RAISING%"] = playerData[i]["3BetFold"] / playerData[i]["3BetFaceTotal"] if playerData[i]["3BetFaceTotal"] != 0 else "NA"
+        playerStats[i]["FOLD TO 3BET AFTER RAISING%"] = playerData[i]["3BetFoldAfterRaising"] / playerData[i]["3BetFaceTotalAfterRaising"] if playerData[i]["3BetFaceTotalAfterRaising"] != 0 else "NA"
         playerStats[i]["4BET%"] = playerData[i]["4BET"] / playerData[i]["3BetFaceTotal"] if playerData[i]["3BetFaceTotal"] != 0 else "NA"
         playerStats[i]["4BET FOLD%"] = playerData[i]["4BetFold"] / playerData[i]["4BetFaceTotal"] if playerData[i]["4BetFaceTotal"] != 0 else "NA"
         playerStats[i]["5BET%"] = playerData[i]["5BET"] / playerData[i]["4BetFaceTotal"] if playerData[i]["4BetFaceTotal"] != 0 else "NA"
